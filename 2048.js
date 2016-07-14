@@ -58,7 +58,7 @@ function checkKey(e) {
     addNewTile();
     showBoard();
   }
-
+  checkIfgameOver();
 }
 
 var pressDown = function(){
@@ -174,7 +174,7 @@ var addNewTile = function(){
   if(randomTile != undefined){
     grid[randomTile[0]][randomTile[1]] = 2;
   }
-  else{
+  else if(emptySpaces.length === 0){
     gameOver();
   }
 }
@@ -217,7 +217,17 @@ var checkIfLegalMove = function(direction){
   }
   return false;
 }
-var gameOver = function(){
+var checkIfgameOver = function(){
+  for(var i = 0; i < 4; i++){
+    for(var j = 0; j < 4; j++){
+      if(grid[i][j] === 0){
+        return false;
+      }
+    }
+  }
+  if(checkIfLegalMove("up") || checkIfLegalMove("down") || checkIfLegalMove("left") || checkIfLegalMove("right")){
+    return false;
+  }
   window.alert("game over");
-  gameOver = true;
+  return true;
 }
