@@ -84,10 +84,10 @@ var startNewGame = function(){
 		grid.push(row);
 	}
 	currentBlock = getRandomBlock();
-	grid[currentBlock.form[0][0]][currentBlock.form[0][1] + currentBlock.x] = currentBlock.color;
-	grid[currentBlock.form[1][0]][currentBlock.form[1][1] + currentBlock.x] = currentBlock.color;
-	grid[currentBlock.form[2][0]][currentBlock.form[2][1] + currentBlock.x] = currentBlock.color;
-	grid[currentBlock.form[3][0]][currentBlock.form[3][1] + currentBlock.x] = currentBlock.color;
+	grid[currentBlock.form[0][0] + currentBlock.y][currentBlock.form[0][1] + currentBlock.x] = currentBlock.color;
+	grid[currentBlock.form[1][0] + currentBlock.y][currentBlock.form[1][1] + currentBlock.x] = currentBlock.color;
+	grid[currentBlock.form[2][0] + currentBlock.y][currentBlock.form[2][1] + currentBlock.x] = currentBlock.color;
+	grid[currentBlock.form[3][0] + currentBlock.y][currentBlock.form[3][1] + currentBlock.x] = currentBlock.color;
 	gameIsStarted = true;
 	showBoard();
 }
@@ -169,7 +169,7 @@ var checkIfLegalMove = function(dir){
 var getRandomBlock = function() {
 	var type = Math.floor(Math.random() * 7);
 	block = new Block(Blocks[Blocks[type]]);
-	block.y = 0;
+	block.y = 1;
 	block.x = 3;
 	return block;
 }
