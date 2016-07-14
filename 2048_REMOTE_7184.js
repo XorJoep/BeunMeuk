@@ -1,11 +1,5 @@
 var grid =[]
-<<<<<<< HEAD
-
-document.onkeydown = checkKey;
-
-=======
 var gameOver = false;
->>>>>>> 29ee95202450a2d70ab20d991959caa471d7a356
 var startNewGame = function(){
   gameOver = false;
   for(var i = 0; i < 4; i++){
@@ -25,41 +19,22 @@ var startNewGame = function(){
 var getRandomNumber = function(){
 	return Math.floor((Math.random() * 4));
 }
-
-var getColor = function(value) {
-  l = Math.log2(value);
-  return "" + (250-l*50)*(l<6) + ", " + (l%6*50)*(l>6) + ")";
-}
-
 var showBoard = function(){
-  var board = document.getElementById("board");
-  var rows = board.getElementsByClassName("row");
-  var tiles;
-  for (var i = 0; i < rows.length; i++) {
-    tiles = rows[i].getElementsByClassName("tile");
-    for (var j = 0; j < tiles.length; j++) {
-      tiles[j].textContent = grid[i][j] || "";
-      tiles[j].style.background = grid[i][j] ? "rgb(255," + getColor(grid[i][j]) : "lightgrey";
-      tiles[j].style.fontSize = Math.log2(grid[i][j]) > 6 ? "30px" : "50px";
+  s = "";
+  for(var i = 0; i < 4; i++){
+    s += "<div class = 'row'>";
+    for(var j = 0; j < 4; j++){
+      s += "<div class ='tile" + grid[i][j] + "'>";
+      if(grid[i][j] !== 0){
+        s += grid[i][j];
+      }
+      s += "</div>";
     }
+    s += "</div>"
   }
-  
-
-  // s = "";
-  // for(var i = 0; i < 4; i++){
-  //   s += "<div class = 'row'>";
-  //   for(var j = 0; j < 4; j++){
-  //     s += "<div class ='tile" + grid[i][j] + "'>";
-  //     if(grid[i][j] !== 0){
-  //       s += grid[i][j];
-  //     }
-  //     s += "</div>";
-  //   }
-  //   s += "</div>"
-  // }
-  // document.getElementById("board").innerHTML = s;
-  }
-
+  document.getElementById("board").innerHTML = s;
+}
+document.onkeydown = checkKey;
 
 function checkKey(e) {
   e = e || window.event;
