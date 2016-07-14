@@ -1,7 +1,8 @@
-
-
-var getBlock = function(number){
+var getBlock = function(number) {
+	
 	block = {
-		this.
+		sizeX : number
 	}
+
+	return block;
 }
