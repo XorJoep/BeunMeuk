@@ -1,0 +1,27 @@
+h1{
+  align-content: center;
+}
+.description{
+  color: red;
+}
+#numbers{
+  color: blue;
+  font-size: 30px;
+  font-weight: bold;
+}
+button{
+  background-color: green;
+  padding: 14px;
+  margin: 14px;
+  text-align: center;
+  border: none;
+  color: white;
+  font-size: 20px;
+}
+button:hover{
+  background-color: blue;
+}
+#highscore{
+  border: solid;
+  width: 200px;
+}
