@@ -1,51 +1,66 @@
 var grid = [];
 
+RGBToHex = function(r,g,b){
+    var bin = r << 16 | g << 8 | b;
+    return (function(h){
+        return new Array(7-h.length).join("0")+h
+    })(bin.toString(16).toUpperCase())
+}
 
 var Blocks = {
-	O : 0,
-	I : 1,
-	J : 2,
-	L : 3,
-	S : 4,
-	T : 5,
-	Z : 6,
-	prop: {
-		0: {
-			code: "O",
-			rotatable: false,
-			form: [[0, 0], [1, 0], [0, 1], [1,1]]
-			},
-		1: {
-			code: "I",
-			rotatable: true,
-			form: [[0, 0], [1, 0], [2, 0], [3, 0]]
+
+	O: {
+		code: "O",
+		rotatable: false,
+		form: [[0, 0], [1, 0], [0, 1], [1,1]],
+		color: RGBToHex(255,255,0) //yellow
 		},
-		2: {
-			code: "J",
-			rotatable: true,
-			form: [[0, 0], [1, 0], [1, 0], [2, 0]]
-		},
-		3: {
-			code: "L",
-			rotatable: true,
-			form: [[0, 0], [1, 0], [2, 0], [2, 1]]
-		},
-		4: {
-			code: "S",
-			rotatable: true,
-			form: [[0, 0], [0, 1], [1, 1], [2, 1]]
-		},
-		5: {
-			code: "T",
-			rotatable: true,
-			form: [[0, 0], [1, 0], [2, 0], [1, 1]]
-		},
-		6: {
-			code: "Z",
-			rotatable: true,
-			form: [[0, 1], [1, 1], [1, 0], [2, 0]]
-		}
-	}
+	I: {
+		code: "I",
+		rotatable: true,
+		form: [[0, 0], [1, 0], [2, 0], [3, 0]],
+		color: RGBToHex(0,200,255) //lightblue
+	},
+	J: {
+		code: "J",
+		rotatable: true,
+		form: [[0, 0], [1, 0], [1, 0], [2, 0]],
+		color: RGBToHex(0,0,255) //darkblue
+	},
+	L: {
+		code: "L",
+		rotatable: true,
+		form: [[0, 0], [1, 0], [2, 0], [2, 1]],
+		color: RGBToHex(255,180,0) //Orange
+	},
+	S: {
+		code: "S",
+		rotatable: true,
+		form: [[0, 0], [0, 1], [1, 1], [2, 1]],
+		color: RGBToHex(255,0,200) //Pink
+	},
+	T: {
+		code: "T",
+		rotatable: true,
+		form: [[0, 0], [1, 0], [2, 0], [1, 1]],
+		color: RGBToHex(200,0,255) //Purple
+	},
+	Z: {
+		code: "Z",
+		rotatable: true,
+		form: [[0, 1], [1, 1], [1, 0], [2, 0]],
+		color: RGBToHex(255,0,0) //Red
+	},
+
+	0 : "O",
+	1 : "I",
+	2 : "J",
+	3 : "L",
+	4 : "S",
+	5 : "T",
+	6 : "Z"
+
+	// }
 }
 
 
@@ -72,10 +87,9 @@ var showBoard = function(){
 
 var getRandomBlock = function() {
 	var type = Math.floor(Math.random() * 7);
-	block = {
-		color : type,
-		form : Blocks.prop[type].form
-	}
+	block = Blocks[Blocks[type]];
+	block.y = 0;
+	block.x = Math.floor(Math.random() * 8);
 	return block;
 }
 
