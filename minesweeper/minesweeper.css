@@ -1,0 +1,87 @@
+.tile{
+  width: 20px;
+  height: 20px;
+  padding: 2px;
+  margin: 2px;
+  background: darkgrey;
+}
+.turnedTile0{
+  width: 20px;
+  height: 20px;
+  padding: 2px;
+  margin: 2px;
+  background: lightgrey;
+}
+.turnedTile1{
+  width: 20px;
+  height: 20px;
+  padding: 2px;
+  margin: 2px;
+  background: lightgrey;
+}
+.turnedTile2{
+  width: 20px;
+  height: 20px;
+  padding: 2px;
+  margin: 2px;
+  background: lightgrey;
+  color: blue;
+}
+.turnedTile3{
+  width: 20px;
+  height: 20px;
+  padding: 2px;
+  margin: 2px;
+  background: lightgrey;
+  color: red;
+}
+.turnedTile4{
+  width: 20px;
+  height: 20px;
+  padding: 2px;
+  margin: 2px;
+  background: lightgrey;
+  color: green;
+}
+.turnedTile5{
+  width: 20px;
+  height: 20px;
+  padding: 2px;
+  margin: 2px;
+  background: lightgrey;
+  color: purple;
+}
+.turnedTile6{
+  width: 20px;
+  height: 20px;
+  padding: 2px;
+  margin: 2px;
+  background: lightgrey;
+  color: orange;
+}
+.turnedTile7{
+  width: 20px;
+  height: 20px;
+  padding: 2px;
+  margin: 2px;
+  background: lightgrey;
+  color: pink;
+}
+.turnedTile8{
+  width: 20px;
+  height: 20px;
+  padding: 2px;
+  margin: 2px;
+  background: lightgrey;
+  color: darkblue;
+}
+.bombTile{
+  width: 20px;
+  height: 20px;
+  padding: 2px;
+  margin: 2px;
+  background: orange;
+}
+#parent{
+  display:flex;
+}
