@@ -1,7 +1,6 @@
 var grid = [];
-
-
 var currentBlock;
+var gameIsStarted = false;
 
 RGBToHex = function(r,g,b){
     var bin = r << 16 | g << 8 | b;
@@ -65,17 +64,21 @@ var Blocks = {
 
 	// }
 }
-
-
 var startNewGame = function(){
-	for(var i = 0; i < 8; i++){
+	for(var i = 0; i < 16; i++){
 		var row = [];
-		for(var j = 0; j < 16; j++){
+		for(var j = 0; j < 8; j++){
 			row.push(0);
 		}
 		grid.push(row);
 	}
 	currentBlock = getRandomBlock();
+	grid[currentBlock.form[0][0]][currentBlock.form[0][1]] = currentBlock.color;
+	grid[currentBlock.form[1][0]][currentBlock.form[1][1]] = currentBlock.color;
+	grid[currentBlock.form[2][0]][currentBlock.form[2][1]] = currentBlock.color;
+	grid[currentBlock.form[3][0]][currentBlock.form[3][1]] = currentBlock.color;
+	gameIsStarted = true;
+	showBoard();
 }
 
 var showBoard = function(){
@@ -85,7 +88,8 @@ var showBoard = function(){
   for (var i = 0; i < rows.length; i++) {
     tiles = rows[i].getElementsByClassName("tile");
     for (var j = 0; j < tiles.length; j++) {
-      tiles[j].style.background = grid[i][j] ?  currentBlock.color : "lightgrey";
+			console.log("hj");
+      tiles[j].style.background = grid[i][j] !==0  ? grid[i][j]  : "lightgrey";
     }
 	}
 }
@@ -98,6 +102,20 @@ var getRandomBlock = function() {
 	return block;
 }
 
+
 var interval = setInterval(function() {
-  currentBlock.moveDown();
+	if(gameIsStarted){
+		grid[currentBlock.form[0][0]][currentBlock.form[0][1]] = 0;
+		grid[currentBlock.form[1][0]][currentBlock.form[1][1]] = 0;
+		grid[currentBlock.form[2][0]][currentBlock.form[2][1]] = 0;
+		grid[currentBlock.form[3][0]][currentBlock.form[3][1]] = 0;
+	  currentBlock.form[0][1] ++;
+		currentBlock.form[1][1] ++;
+		currentBlock.form[2][1] ++;
+		currentBlock.form[3][1] ++;
+		grid[currentBlock.form[0][0]][currentBlock.form[0][1]] = currentBlock.color;
+		grid[currentBlock.form[1][0]][currentBlock.form[1][1]] = currentBlock.color;
+		grid[currentBlock.form[2][0]][currentBlock.form[2][1]] = currentBlock.color;
+		grid[currentBlock.form[3][0]][currentBlock.form[3][1]] = currentBlock.color;
+	}
 }, 1000);
