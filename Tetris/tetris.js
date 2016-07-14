@@ -1,5 +1,8 @@
 var grid = [];
 
+
+var currentBlock;
+
 RGBToHex = function(r,g,b){
     var bin = r << 16 | g << 8 | b;
     return (function(h){
@@ -72,7 +75,9 @@ var startNewGame = function(){
 		}
 		grid.push(row);
 	}
+	currentBlock = getRandomBlock();
 }
+
 var showBoard = function(){
 	var board = document.getElementById("board");
   var rows = board.getElementsByClassName("row");
@@ -93,3 +98,6 @@ var getRandomBlock = function() {
 	return block;
 }
 
+var interval = setInterval(function() {
+  currentBlock.moveDown();
+}, 1000);
