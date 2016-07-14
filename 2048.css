@@ -1,0 +1,31 @@
+.row{
+  display:flex;
+}
+.tile{
+  align: center;
+  width: 50px;
+  height:50px;
+  padding: 5px;
+  margin: 5px;
+  background: lightgrey;
+}
+.tile0{
+  font-size: 50px;
+  text-align: center;
+  width: 50px;
+  height:50px;
+  line-height: 50px;
+  padding: 5px;
+  margin: 5px;
+  background: lightgrey;
+}
+.tile2{
+  font-size: 50px;
+  text-align: center;
+  width: 50px;
+  height:50px;
+  line-height: 50px;
+  padding: 5px;
+  margin: 5px;
+  background: yellow;
+}
