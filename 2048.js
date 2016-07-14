@@ -1,11 +1,8 @@
 var grid =[]
-<<<<<<< HEAD
 
 document.onkeydown = checkKey;
 
-=======
 var gameOver = false;
->>>>>>> 29ee95202450a2d70ab20d991959caa471d7a356
 var startNewGame = function(){
   gameOver = false;
   for(var i = 0; i < 4; i++){
