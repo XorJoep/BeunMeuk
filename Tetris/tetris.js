@@ -174,6 +174,10 @@ var checkIfMoveable = function(){
 			return false;
 		}
 	}
+	var currentBlockCoords = [];
+	for(var i = 0; i < 4; i++){
+		currentBlockCoords.push([currentBlock.y + currentBlock.form[i][0] , currentBlock.x + currentBlock.form[i][1]]);
+	}
 	return true;
 }
 
