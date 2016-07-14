@@ -13,12 +13,37 @@ var Blocks = {
 		0: {
 			code: "O",
 			rotatable: false,
-			form: [[0,1]
+			form: [[0, 0], [1, 0], [0, 1], [1,1]]
 			},
 		1: {
 			code: "I",
-			rotatable: true
-
+			rotatable: true,
+			form: [[0, 0], [1, 0], [2, 0], [3, 0]]
+		},
+		2: {
+			code: "J",
+			rotatable: true,
+			form: [[0, 0], [1, 0], [1, 0], [2, 0]]
+		},
+		3: {
+			code: "L",
+			rotatable: true,
+			form: [[0, 0], [1, 0], [2, 0], [2, 1]]
+		},
+		4: {
+			code: "S",
+			rotatable: true,
+			form: [[0, 0], [0, 1], [1, 1], [2, 1]]
+		},
+		5: {
+			code: "T",
+			rotatable: true,
+			form: [[0, 0], [1, 0], [2, 0], [1, 1]]
+		},
+		6: {
+			code: "Z",
+			rotatable: true,
+			form: [[0, 1], [1, 1], [1, 0], [2, 0]]
 		}
 	}
 }
@@ -46,21 +71,14 @@ var showBoard = function(){
     }
 	}
 }
-var getBlock = function(number) {
-
-	block = {
-		sizeX : number
-	}
-
-	return block;
-}
-
 
 var getRandomBlock = function() {
 	var type = Math.floor(Math.random() * 7);
-	block {
+	block = {
 		color : type,
+		form : Blocks.prop[type].form
 	}
+	return block;
 }
 
 var interval = setInterval(function() {
