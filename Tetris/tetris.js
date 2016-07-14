@@ -1,5 +1,5 @@
 var grid = [];
-
+var currentBlock;
 
 var Blocks = {
 	O : 0,
@@ -32,7 +32,9 @@ var startNewGame = function(){
 		}
 		grid.push(row);
 	}
+	currentBlock = getRandomBlock();
 }
+
 var showBoard = function(){
 	var board = document.getElementById("board");
   var rows = board.getElementsByClassName("row");
@@ -61,3 +63,6 @@ var getRandomBlock = function() {
 	}
 }
 
+var interval = setInterval(function() {
+  currentBlock.moveDown();
+}, 1000);
