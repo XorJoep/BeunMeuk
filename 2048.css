@@ -27,7 +27,7 @@
   line-height: 50px;
   padding: 5px;
   margin: 5px;
-  background: yellow;
+  background: rgb(255,255,0);
 }
 .tile4{
   font-size: 50px;
@@ -37,7 +37,7 @@
   line-height: 50px;
   padding: 5px;
   margin: 5px;
-  background: orange;
+  background: rgb(255,200,0);
 }
 .tile8{
   font-size: 50px;
@@ -47,7 +47,7 @@
   line-height: 50px;
   padding: 5px;
   margin: 5px;
-  background: red;
+  background: rgb(255,150,0);
 }
 .tile16{
   font-size: 50px;
@@ -57,7 +57,7 @@
   line-height: 50px;
   padding: 5px;
   margin: 5px;
-  background: darkred;
+  background: rgb(255,100,0);
 }
 .tile32{
   font-size: 50px;
@@ -67,5 +67,66 @@
   line-height: 50px;
   padding: 5px;
   margin: 5px;
-  background: purple;
+  background: rgb(255,50,0);
+}
+.tile64{
+  font-size: 50px;
+  text-align: center;
+  width: 50px;
+  height:50px;
+  line-height: 50px;
+  padding: 5px;
+  margin: 5px;
+  background: rgb(255,0,0);
+}
+.tile128{
+  font-size: 30px;
+  text-align: center;
+  width: 50px;
+  height:50px;
+  line-height: 50px;
+  padding: 5px;
+  margin: 5px;
+  background: rgb(255,0,50);
+}
+.tile256{
+  font-size: 30px;
+  text-align: center;
+  width: 50px;
+  height:50px;
+  line-height: 50px;
+  padding: 5px;
+  margin: 5px;
+  background: rgb(255,0,100);
+}
+.tile512{
+  font-size: 30px;
+  text-align: center;
+  width: 50px;
+  height:50px;
+  line-height: 50px;
+  padding: 5px;
+  margin: 5px;
+  background: rgb(255,0,150);
+}
+.tile1024{
+  font-size: 50px;
+  text-align: center;
+  width: 50px;
+  height:50px;
+  line-height: 50px;
+  padding: 5px;
+  margin: 5px;
+  background: rgb(255,0,200);
+}
+.tile2048{
+  color: white;
+  font-size: 50px;
+  text-align: center;
+  width: 50px;
+  height:50px;
+  line-height: 50px;
+  padding: 5px;
+  margin: 5px;
+  background: rgb(255,0,255);
 }

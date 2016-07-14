@@ -63,7 +63,7 @@ var pressDown = function(){
         }
       }
     }
-    for(var i = 3; i > 1; i--){
+    for(var i = 3; i > 0; i--){
       for(var j = 0; j < 4; j++){
         if(grid[i][j] === grid[i - 1][j]){
           grid[i][j] *= 2;
