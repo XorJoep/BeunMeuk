@@ -24,7 +24,7 @@ var Blocks = {
 	O: {
 		code: "O",
 		rotatable: false,
-		form: [[1, 0], [0, 0], [0, 1], [1,1]],
+		form: [[-1, 0], [0, 0], [0, 1], [-1,1]],
 		color: RGBToHex(255,255,0) //yellow
 		},
 	I: {
@@ -170,7 +170,7 @@ var getRandomBlock = function() {
 	var type = Math.floor(Math.random() * 7);
 	block = new Block(Blocks[Blocks[type]]);
 	block.y = 0;
-	block.x = 3;
+	block.x = Math.floor(Math.random() * 8);
 	return block;
 }
 
@@ -178,26 +178,24 @@ function multiply(a, b) {
   var aNumRows = a.length, aNumCols = a[0].length,
       bNumRows = b.length, bNumCols = b[0].length,
       m = new Array(aNumRows);  // initialize array of rows
-  for (var r = 0; r < aNumRows; ++r) {
-    m[r] = new Array(bNumCols); // initialize the current row
-    for (var c = 0; c < bNumCols; ++c) {
-      m[r][c] = 0;             // initialize the current cell
-      for (var i = 0; i < aNumCols; ++i) {
-        m[r][c] += a[r][i] * b[i][c];
-      }
-    }
-  }
-  return m;
+	  for (var r = 0; r < aNumRows; ++r) {
+	    m[r] = new Array(bNumCols); // initialize the current row
+	    for (var c = 0; c < bNumCols; ++c) {
+	      m[r][c] = 0;             // initialize the current cell
+	      for (var i = 0; i < aNumCols; ++i) {
+	        m[r][c] += a[r][i] * b[i][c];
+	      }
+	    }
+	  }
+	  return m;
 }
 
 var rotateBlock = function(block, orientation) {
 	//rotates around second value in form
 	if(!block.rotatable) return block;
-	// if(orientation){
 		for (var i = 0; i < block.form.length; i++) {
-			block.form[i] = multiply([block.form[i]], [[0, 1], [-1, 0]])[0];
+			block.form[i] = multiply([block.form[i]], orientation ? [[0, 1], [-1, 0]] : [[0, -1], [1, 0]])[0];
 		}
-	// }
 	return block;
 
 }
