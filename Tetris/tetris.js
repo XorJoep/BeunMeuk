@@ -7,6 +7,7 @@ document.onkeydown = checkKey;
 
 var startNewGame = function(){
 	normalSpeed = true;
+  grid = [];
 	for(var i = 0; i < 16; i++){
 		var row = [];
 		for(var j = 0; j < 8; j++){
@@ -129,8 +130,6 @@ var rotateBlock = function(block, orientation) {
 	for (var i = 0; i < block.form.length; i++) {
     	grid[block.y + block.form[i][0]][block.x + block.form[i][1]] = 0;
     	rotatedForm = multiply([block.form[i]], orientation ? [[0, 1], [-1, 0]] : [[0, -1], [1, 0]])[0];
-		if (rotatedForm[0]+block.x)
-		block.form[i] =
 		// debugger;
 	}
 	grid[block.form[0][0] + block.y][block.x + block.form[0][1]] = block.color;
@@ -147,24 +146,13 @@ var checkIfMoveable = function(){
 			return false;
 		}
 	}
-	//var blocksThatCollide = getBlocksThatCanCollide();
-	return true;
-}
-
-var getBlocksThatCanCollide = function(){
-  var firstBlock = currentBlock.form[0];
-  var secondBlock = currentBlock.form[1];
-  var thirdBlock = currentBlock.form[2];
-  var fourthBlock = currentBlock.form[3];
-  for(var i = i; i < 4; i++){
-    if(currentBlock.form[0][0] === currentBlock.form[i][0])
-	for(var i = 0; i < 4; i++){
+  for(var i = 0; i < 4; i++){
     if(grid[currentBlock.y + currentBlock.form[i][0] + 1][currentBlock.x + currentBlock.form[i][1]] !== 0 && !checkIfCoorIsInCurrentBlock(currentBlock.y + currentBlock.form[i][0] + 1, currentBlock.x + currentBlock.form[i][1])){
       currentBlock = getRandomBlock();
       return false;
     }
   }
-  return true;
+	return true;
 }
 
 var interval = setInterval(function() {
