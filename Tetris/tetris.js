@@ -112,9 +112,14 @@ var rotateBlock = function(block, orientation) {
    }
 	for (var i = 0; i < block.form.length; i++) {
     	grid[block.y + block.form[i][0]][block.x + block.form[i][1]] = 0;
+<<<<<<< HEAD
+      block.form[i] = multiply([block.form[i]], orientation ? [[0, 1], [-1, 0]] : [[0, -1], [1, 0]])[0];
+		// debugger;
+=======
     	block.form[i] = multiply([block.form[i]], orientation ? [[0, 1], [-1, 0]] : [[0, -1], [1, 0]])[0];
 
     	rotatedForm = multiply([block.form[i]], orientation ? [[0, 1], [-1, 0]] : [[0, -1], [1, 0]])[0];
+>>>>>>> 8f658fa1595674858010ad47c44fddddb1f88369
 	}
 	grid[block.form[0][0] + block.y][block.x + block.form[0][1]] = block.color;
 	grid[block.y + block.form[1][0]][block.x + block.form[1][1]] = block.color;
@@ -126,20 +131,18 @@ var rotateBlock = function(block, orientation) {
 var checkIfMoveable = function(){
 	for(var i = 0; i < 4; i++){
 		if(currentBlock.y + currentBlock.form[i][0] === 15){
+      checkIfLinesNeedToBeDeleted();
 			currentBlock = getRandomBlock();
 			return false;
 		}
 	}
-	for(var i = i; i < 4; i++){
-    if(currentBlock.form[0][0] === currentBlock.form[i][0]) {
-		for(var i = 0; i < 4; i++) {
-		    if(grid[currentBlock.y + currentBlock.form[i][0] + 1][currentBlock.x + currentBlock.form[i][1]] !== 0 && grid[currentBlock.form[i][0] + currentBlock.y][currentBlock.form[i][1] + currentBlock.x] !== grid[currentBlock.form[i][0] + currentBlock.y + 1][currentBlock.form[i][1] + currentBlock.x]){
-		      currentBlock = getRandomBlock();
-		      return false;
-		    }
-	   }
-	}
- }//var blocksThatCollide = getBlocksThatCanCollide();
+  for(var i = 0; i < 4; i++){
+    if(grid[currentBlock.y + currentBlock.form[i][0] + 1][currentBlock.x + currentBlock.form[i][1]] !== 0 && !checkIfCoorIsInCurrentBlock(currentBlock.y + currentBlock.form[i][0] + 1, currentBlock.x + currentBlock.form[i][1])){
+      checkIfLinesNeedToBeDeleted();
+      currentBlock = getRandomBlock();
+      return false;
+    }
+  }
 	return true;
 }
 
@@ -170,9 +173,49 @@ var interval = setInterval(function() {
 		grid[currentBlock.y + currentBlock.form[1][0]][currentBlock.x + currentBlock.form[1][1]] = currentBlock.color;
 		grid[currentBlock.y + currentBlock.form[2][0]][currentBlock.x + currentBlock.form[2][1]] = currentBlock.color;
 		grid[currentBlock.y + currentBlock.form[3][0]][currentBlock.x + currentBlock.form[3][1]] = currentBlock.color;
+
 		showBoard();
 	}
 }, 100);
 var gameOver = function(){
   window.alert("game Over");
+}
+var checkIfLineIsFull = function(i){
+  for(var j = 0; j < 8; j++){
+    if(grid[i][j] === 0){
+      return false;
+    }
+  }
+  return true;
+}
+var checkIfLineIsEmpty = function(i){
+  for(var j = 0; j < 8; j++){
+    if(grid[i][j] !== 0){
+      return false;
+    }
+  }
+  return true;
+}
+var checkIfLinesNeedToBeDeleted = function(){
+  for(var i = 0; i < 16; i++){
+    if(checkIfLineIsFull(i)){
+      for(var j = 0; j < 8; j++){
+        grid[i][j] = 0;
+      }
+    }
+  }
+  applyGravity();
+}
+var applyGravity = function(){
+  for(var i = 15; i > 0; i--){
+    var amountOfEmptyLines = 0;
+    while(i - amountOfEmptyLines > 0 && checkIfLineIsEmpty(i - amountOfEmptyLines)){
+      amountOfEmptyLines++;
+    }
+    for(var k = i; k > amountOfEmptyLines; k--){
+      for(var j = 0; j < 8; j++){
+        grid[k][j] = grid[k - amountOfEmptyLines][j];
+      }
+    }
+  }
 }
