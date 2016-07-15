@@ -22,6 +22,7 @@ var startNewGame = function(){
 	gameIsStarted = true;
 	showBoard();
 }
+
 function checkKey(e) {
   e = e || window.event;
   if(e.keyCode == '38' ) {//&& checkIfLegalMove("up")){
@@ -45,6 +46,7 @@ function checkKey(e) {
     showBoard();
   }
 }
+
 var showBoard = function(){
   var board = document.getElementById("board");
   var rows = board.getElementsByClassName("row");
@@ -79,7 +81,8 @@ var pressRight = function() {
 	grid[currentBlock.form[2][0] + currentBlock.y][currentBlock.form[2][1] + currentBlock.x] = currentBlock.color;
 	grid[currentBlock.form[3][0] + currentBlock.y][currentBlock.form[3][1] + currentBlock.x] = currentBlock.color;
 }
-var checkIfLegalMove = function(dir){
+
+var checkIfLegalMove = function(dir) {
 	if(dir === "left"){
 		for(var i = 0; i < 4; i++){
 			if(currentBlock.form[i][1] + currentBlock.x === 0){
@@ -96,6 +99,7 @@ var checkIfLegalMove = function(dir){
 	}
 	return true;
 }
+
 var getRandomBlock = function() {
   if(grid[3][2] !== 0){
     gameOver();
@@ -123,15 +127,17 @@ var rotateBlock = function(block, orientation) {
      return block;
    }
 	for (var i = 0; i < block.form.length; i++) {
-    grid[currentBlock.y + currentBlock.form[i][0]][currentBlock.x + currentBlock.form[i][1]] = 0;
-		block.form[i] = multiply([block.form[i]], orientation ? [[0, 1], [-1, 0]] : [[0, -1], [1, 0]])[0];
+    	grid[block.y + block.form[i][0]][block.x + block.form[i][1]] = 0;
+    	rotatedForm = multiply([block.form[i]], orientation ? [[0, 1], [-1, 0]] : [[0, -1], [1, 0]])[0];
+		if (rotatedForm[0]+block.x)
+		block.form[i] =
+		// debugger;
 	}
-  grid[currentBlock.form[0][0] + currentBlock.y][currentBlock.x + currentBlock.form[0][1]] = currentBlock.color;
-  grid[currentBlock.y + currentBlock.form[1][0]][currentBlock.x + currentBlock.form[1][1]] = currentBlock.color;
-  grid[currentBlock.y + currentBlock.form[2][0]][currentBlock.x + currentBlock.form[2][1]] = currentBlock.color;
-  grid[currentBlock.y + currentBlock.form[3][0]][currentBlock.x + currentBlock.form[3][1]] = currentBlock.color;
+	grid[block.form[0][0] + block.y][block.x + block.form[0][1]] = block.color;
+	grid[block.y + block.form[1][0]][block.x + block.form[1][1]] = block.color;
+	grid[block.y + block.form[2][0]][block.x + block.form[2][1]] = block.color;
+	grid[block.y + block.form[3][0]][block.x + block.form[3][1]] = block.color;
 	return block;
-
 }
 
 var checkIfMoveable = function(){
@@ -141,6 +147,17 @@ var checkIfMoveable = function(){
 			return false;
 		}
 	}
+	//var blocksThatCollide = getBlocksThatCanCollide();
+	return true;
+}
+
+var getBlocksThatCanCollide = function(){
+  var firstBlock = currentBlock.form[0];
+  var secondBlock = currentBlock.form[1];
+  var thirdBlock = currentBlock.form[2];
+  var fourthBlock = currentBlock.form[3];
+  for(var i = i; i < 4; i++){
+    if(currentBlock.form[0][0] === currentBlock.form[i][0])
 	for(var i = 0; i < 4; i++){
     if(grid[currentBlock.y + currentBlock.form[i][0] + 1][currentBlock.x + currentBlock.form[i][1]] !== 0 && !checkIfCoorIsInCurrentBlock(currentBlock.y + currentBlock.form[i][0] + 1, currentBlock.x + currentBlock.form[i][1])){
       currentBlock = getRandomBlock();
@@ -162,9 +179,9 @@ var interval = setInterval(function() {
 		grid[currentBlock.y + currentBlock.form[2][0]][currentBlock.x + currentBlock.form[2][1]] = currentBlock.color;
 		grid[currentBlock.y + currentBlock.form[3][0]][currentBlock.x + currentBlock.form[3][1]] = currentBlock.color;
 		showBoard();
-		// debugger;
 	}
 }, 500);
+
 var interval = setInterval(function() {
 	if(gameIsStarted && !normalSpeed && checkIfMoveable()){
 		grid[currentBlock.y + currentBlock.form[0][0]][currentBlock.x + currentBlock.form[0][1]] = 0;
