@@ -93,11 +93,10 @@ var startNewGame = function(){
 }
 function checkKey(e) {
   e = e || window.event;
-  // if(e.keyCode == '38' && checkIfLegalMove("up")){
-  //   pressUp();
-  //   addNewTile();
-  //   showBoard();
-  // }
+  if(e.keyCode == '38' ) {//&& checkIfLegalMove("up")){
+    currentBlock = rotateBlock(currentBlock,1);
+    showBoard();
+  }
   if (e.keyCode == '40') {
 		if(normalSpeed){
     	normalSpeed = false;
@@ -226,6 +225,7 @@ var interval = setInterval(function() {
 		grid[currentBlock.y + currentBlock.form[2][0]][currentBlock.x + currentBlock.form[2][1]] = currentBlock.color;
 		grid[currentBlock.y + currentBlock.form[3][0]][currentBlock.x + currentBlock.form[3][1]] = currentBlock.color;
 		showBoard();
+		// debugger;
 	}
 }, 1000);
 var interval = setInterval(function() {
