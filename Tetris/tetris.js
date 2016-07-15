@@ -116,14 +116,8 @@ var rotateBlock = function(block, orientation) {
    }
 	for (var i = 0; i < block.form.length; i++) {
     	grid[block.y + block.form[i][0]][block.x + block.form[i][1]] = 0;
-<<<<<<< HEAD
       block.form[i] = multiply([block.form[i]], orientation ? [[0, 1], [-1, 0]] : [[0, -1], [1, 0]])[0];
-		// debugger;
-=======
-    	block.form[i] = multiply([block.form[i]], orientation ? [[0, 1], [-1, 0]] : [[0, -1], [1, 0]])[0];
 
-    	rotatedForm = multiply([block.form[i]], orientation ? [[0, 1], [-1, 0]] : [[0, -1], [1, 0]])[0];
->>>>>>> 8f658fa1595674858010ad47c44fddddb1f88369
 	}
 	grid[block.form[0][0] + block.y][block.x + block.form[0][1]] = block.color;
 	grid[block.y + block.form[1][0]][block.x + block.form[1][1]] = block.color;
