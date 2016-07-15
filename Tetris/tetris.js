@@ -79,6 +79,10 @@ var checkIfLegalMove = function(dir) {
 			if(currentBlock.form[i][1] + currentBlock.x === 0){
 				return false;
 			}
+      if(grid[currentBlock.y + currentBlock.form[i][0]][currentBlock.x + currentBlock.form[i][1] - 1] !== 0 && !checkIfCoorIsInCurrentBlock(currentBlock.y + currentBlock.form[i][0], currentBlock.x + currentBlock.form[i][1] - 1)){
+        console.log("hoi");
+        return false;
+      }
 		}
 	}
 	if(dir === "right"){
@@ -86,12 +90,19 @@ var checkIfLegalMove = function(dir) {
 			if(currentBlock.form[i][1]  + currentBlock.x === 7){
 				return false;
 			}
+      if(grid[currentBlock.y + currentBlock.form[i][0]][currentBlock.x + currentBlock.form[i][1] + 1] !== 0 && !checkIfCoorIsInCurrentBlock(currentBlock.y + currentBlock.form[i][0], currentBlock.x + currentBlock.form[i][1] + 1)){
+        return false;
+      }
 		}
 	}
 	return true;
 }
 
 var getRandomBlock = function() {
+  // if(grid[3][2] !== 0){
+  //   gameOver();
+  //   return;
+  // }
 	var type = Math.floor(Math.random() * 8);
 	block = new Block(Blocks[Blocks[type]]);
 	block.y = 1;
