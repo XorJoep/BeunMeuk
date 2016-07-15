@@ -2,13 +2,14 @@ var grid = [];
 var currentBlock;
 var normalSpeed = true;
 var gameIsStarted = false;
+var interval = setInterval(fallDown, 500);;
 
 document.onkeydown = checkKey;
 
 var startNewGame = function(){
 	currentBlock = getRandomBlock();
 	normalSpeed = true;
-  grid = [];
+    grid = [];
 	for(var i = 0; i < 16; i++){
 		var row = [];
 		for(var j = 0; j < 8; j++){
@@ -30,12 +31,14 @@ function checkKey(e) {
     showBoard();
   }
   if (e.keyCode == '40') {
-		if(normalSpeed){
-    	normalSpeed = false;
-		}
-		else{
-			normalSpeed = true;
-		}
+  		clearInterval(interval);
+  		normalSpeed = !normalSpeed;
+  		if (normalSpeed) {
+  			interval = setInterval(fallDown, 500);
+  		}
+  		else {
+  			interval = setInterval(fallDown, 100);
+  		}
   }
   if (e.keyCode == '37' && checkIfLegalMove("left")) {
     moveHorizontal(-1);
@@ -96,7 +99,7 @@ var getRandomBlock = function() {
 	return block;
 }
 
-var checkIfCoorIsInCurrentBlock = function(a,b){
+var checkIfCoorIsInCurrentBlock = function(a,b) {
   for(var i = 0; i < 4; i++){
     if(currentBlock.form[i][0] + currentBlock.y === a && currentBlock.form[i][1] + currentBlock.x === b){
       return true;
@@ -112,14 +115,7 @@ var rotateBlock = function(block, orientation) {
    }
 	for (var i = 0; i < block.form.length; i++) {
     	grid[block.y + block.form[i][0]][block.x + block.form[i][1]] = 0;
-<<<<<<< HEAD
       block.form[i] = multiply([block.form[i]], orientation ? [[0, 1], [-1, 0]] : [[0, -1], [1, 0]])[0];
-		// debugger;
-=======
-    	block.form[i] = multiply([block.form[i]], orientation ? [[0, 1], [-1, 0]] : [[0, -1], [1, 0]])[0];
-
-    	rotatedForm = multiply([block.form[i]], orientation ? [[0, 1], [-1, 0]] : [[0, -1], [1, 0]])[0];
->>>>>>> 8f658fa1595674858010ad47c44fddddb1f88369
 	}
 	grid[block.form[0][0] + block.y][block.x + block.form[0][1]] = block.color;
 	grid[block.y + block.form[1][0]][block.x + block.form[1][1]] = block.color;
@@ -146,37 +142,21 @@ var checkIfMoveable = function(){
 	return true;
 }
 
-
-var interval = setInterval(function() {
-	if(gameIsStarted && normalSpeed && checkIfMoveable()){
-		grid[currentBlock.y + currentBlock.form[0][0]][currentBlock.x + currentBlock.form[0][1]] = 0;
-		grid[currentBlock.y + currentBlock.form[1][0]][currentBlock.x + currentBlock.form[1][1]] = 0;
-		grid[currentBlock.y + currentBlock.form[2][0]][currentBlock.x + currentBlock.form[2][1]] = 0;
-		grid[currentBlock.y + currentBlock.form[3][0]][currentBlock.x + currentBlock.form[3][1]] = 0;
-	  currentBlock.y ++;
-		grid[currentBlock.form[0][0] + currentBlock.y][currentBlock.x + currentBlock.form[0][1]] = currentBlock.color;
-		grid[currentBlock.y + currentBlock.form[1][0]][currentBlock.x + currentBlock.form[1][1]] = currentBlock.color;
-		grid[currentBlock.y + currentBlock.form[2][0]][currentBlock.x + currentBlock.form[2][1]] = currentBlock.color;
-		grid[currentBlock.y + currentBlock.form[3][0]][currentBlock.x + currentBlock.form[3][1]] = currentBlock.color;
+function fallDown() {
+	if(gameIsStarted && checkIfMoveable()) {
+		for (var i = 0; i < 4; i++) {
+			grid[currentBlock.y + currentBlock.form[i][0]][currentBlock.x + currentBlock.form[i][1]] = 0;
+		}
+		currentBlock.y ++;
+		for (var i = 0; i < 4; i++) {
+			grid[currentBlock.y + currentBlock.form[i][0]][currentBlock.x + currentBlock.form[i][1]] = currentBlock.color;
+		}
 		showBoard();
 	}
-}, 500);
+}
 
-var interval = setInterval(function() {
-	if(gameIsStarted && !normalSpeed && checkIfMoveable()){
-		grid[currentBlock.y + currentBlock.form[0][0]][currentBlock.x + currentBlock.form[0][1]] = 0;
-		grid[currentBlock.y + currentBlock.form[1][0]][currentBlock.x + currentBlock.form[1][1]] = 0;
-		grid[currentBlock.y + currentBlock.form[2][0]][currentBlock.x + currentBlock.form[2][1]] = 0;
-		grid[currentBlock.y + currentBlock.form[3][0]][currentBlock.x + currentBlock.form[3][1]] = 0;
-	  currentBlock.y ++;
-		grid[currentBlock.form[0][0] + currentBlock.y][currentBlock.x + currentBlock.form[0][1]] = currentBlock.color;
-		grid[currentBlock.y + currentBlock.form[1][0]][currentBlock.x + currentBlock.form[1][1]] = currentBlock.color;
-		grid[currentBlock.y + currentBlock.form[2][0]][currentBlock.x + currentBlock.form[2][1]] = currentBlock.color;
-		grid[currentBlock.y + currentBlock.form[3][0]][currentBlock.x + currentBlock.form[3][1]] = currentBlock.color;
 
-		showBoard();
-	}
-}, 100);
+
 var gameOver = function(){
   window.alert("game Over");
 }
