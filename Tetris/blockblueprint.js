@@ -43,7 +43,7 @@ var Blocks = {
 	S: {
 		code: "S",
 		rotatable: true,
-		form: [[0, 0], [-1, 0], [1, 0], [1, 1]],
+		form: [[0, 0], [-1, 0], [0, 1], [1, 1]],
 		color: RGBToHex(255,0,200) //Pink
 		},
 	T: {
@@ -55,7 +55,7 @@ var Blocks = {
 	Z: {
 		code: "Z",
 		rotatable: true,
-		form: [[0,0], [-1, 0], [1, 0], [0, 1]],
+		form: [[0,0], [0, -1], [-1, -1], [1, 0]],
 		color: RGBToHex(255,0,0) //Red
 	},
 

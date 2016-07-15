@@ -97,7 +97,7 @@ var checkIfLegalMove = function(dir){
 	return true;
 }
 var getRandomBlock = function() {
-	var type = Math.floor(Math.random() * 7);
+	var type = Math.floor(Math.random() * 8);
 	block = new Block(Blocks[Blocks[type]]);
 	block.y = 1;
 	block.x = 3;
