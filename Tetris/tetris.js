@@ -97,11 +97,24 @@ var checkIfLegalMove = function(dir){
 	return true;
 }
 var getRandomBlock = function() {
+  if(grid[3][2] !== 0){
+    gameOver();
+    return;
+  }
 	var type = Math.floor(Math.random() * 8);
 	block = new Block(Blocks[Blocks[type]]);
 	block.y = 1;
 	block.x = 3;
 	return block;
+}
+
+var checkIfCoorIsInCurrentBlock = function(a,b){
+  for(var i = 0; i < 4; i++){
+    if(currentBlock.form[i][0] + currentBlock.y === a && currentBlock.form[i][1] + currentBlock.x === b){
+      return true;
+    }
+  }
+  return false;
 }
 
 var rotateBlock = function(block, orientation) {
@@ -129,7 +142,7 @@ var checkIfMoveable = function(){
 		}
 	}
 	for(var i = 0; i < 4; i++){
-    if(grid[currentBlock.y + currentBlock.form[i][0] + 1][currentBlock.x + currentBlock.form[i][1]] !== 0 && grid[currentBlock.form[i][0] + currentBlock.y][currentBlock.form[i][1] + currentBlock.x] !== grid[currentBlock.form[i][0] + currentBlock.y + 1][currentBlock.form[i][1] + currentBlock.x]){
+    if(grid[currentBlock.y + currentBlock.form[i][0] + 1][currentBlock.x + currentBlock.form[i][1]] !== 0 && !checkIfCoorIsInCurrentBlock(currentBlock.y + currentBlock.form[i][0] + 1, currentBlock.x + currentBlock.form[i][1])){
       currentBlock = getRandomBlock();
       return false;
     }
@@ -151,7 +164,7 @@ var interval = setInterval(function() {
 		showBoard();
 		// debugger;
 	}
-}, 1000);
+}, 500);
 var interval = setInterval(function() {
 	if(gameIsStarted && !normalSpeed && checkIfMoveable()){
 		grid[currentBlock.y + currentBlock.form[0][0]][currentBlock.x + currentBlock.form[0][1]] = 0;
@@ -166,3 +179,6 @@ var interval = setInterval(function() {
 		showBoard();
 	}
 }, 100);
+var gameOver = function(){
+  window.alert("game Over");
+}
