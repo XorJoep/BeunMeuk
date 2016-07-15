@@ -6,6 +6,7 @@ var gameIsStarted = false;
 document.onkeydown = checkKey;
 
 var startNewGame = function(){
+	currentBlock = getRandomBlock();
 	normalSpeed = true;
   grid = [];
 	for(var i = 0; i < 16; i++){
@@ -15,11 +16,9 @@ var startNewGame = function(){
 		}
 		grid.push(row);
 	}
-	currentBlock = getRandomBlock();
-	grid[currentBlock.form[0][0] + currentBlock.y][currentBlock.form[0][1] + currentBlock.x] = currentBlock.color;
-	grid[currentBlock.form[1][0] + currentBlock.y][currentBlock.form[1][1] + currentBlock.x] = currentBlock.color;
-	grid[currentBlock.form[2][0] + currentBlock.y][currentBlock.form[2][1] + currentBlock.x] = currentBlock.color;
-	grid[currentBlock.form[3][0] + currentBlock.y][currentBlock.form[3][1] + currentBlock.x] = currentBlock.color;
+	for(var i = 0; i < 4; i++) {
+		grid[currentBlock.form[i][0] + currentBlock.y][currentBlock.form[i][1] + currentBlock.x] = currentBlock.color;
+	}
 	gameIsStarted = true;
 	showBoard();
 }
@@ -39,48 +38,36 @@ function checkKey(e) {
 		}
   }
   if (e.keyCode == '37' && checkIfLegalMove("left")) {
-    pressLeft();
+    moveHorizontal(-1);
     showBoard();
   }
   else if (e.keyCode == '39' && checkIfLegalMove("right")) {
-    pressRight();
+    moveHorizontal(1);
     showBoard();
   }
 }
 
-var showBoard = function(){
+var showBoard = function() {
   var board = document.getElementById("board");
   var rows = board.getElementsByClassName("row");
   var tiles;
   for (var i = 0; i < rows.length; i++) {
     tiles = rows[i].getElementsByClassName("tile");
     for (var j = 0; j < tiles.length; j++) {
-      tiles[j].style.background = grid[i][j] !==0  ? grid[i][j]  : "lightgrey";
+      tiles[j].style.background = grid[i][j] !== 0 ? grid[i][j]  : "lightgrey";
     	}
 	}
 }
 
-var pressLeft = function() {
-	grid[currentBlock.form[0][0] + currentBlock.y][currentBlock.form[0][1] + currentBlock.x] = 0;
-	grid[currentBlock.form[1][0] + currentBlock.y][currentBlock.form[1][1] + currentBlock.x] = 0;
-	grid[currentBlock.form[2][0] + currentBlock.y][currentBlock.form[2][1] + currentBlock.x] = 0;
-	grid[currentBlock.form[3][0] + currentBlock.y][currentBlock.form[3][1] + currentBlock.x] = 0;
-	currentBlock.x--;
-	grid[currentBlock.form[0][0] + currentBlock.y][currentBlock.form[0][1]  + currentBlock.x] = currentBlock.color;
-	grid[currentBlock.form[1][0] + currentBlock.y][currentBlock.form[1][1]  + currentBlock.x] = currentBlock.color;
-	grid[currentBlock.form[2][0] + currentBlock.y][currentBlock.form[2][1]  + currentBlock.x] = currentBlock.color;
-	grid[currentBlock.form[3][0] + currentBlock.y][currentBlock.form[3][1]  + currentBlock.x] = currentBlock.color;
-}
-var pressRight = function() {
-	grid[currentBlock.form[0][0] + currentBlock.y][currentBlock.form[0][1] + currentBlock.x] = 0;
-	grid[currentBlock.form[1][0] + currentBlock.y][currentBlock.form[1][1] + currentBlock.x] = 0;
-	grid[currentBlock.form[2][0] + currentBlock.y][currentBlock.form[2][1] + currentBlock.x] = 0;
-	grid[currentBlock.form[3][0] + currentBlock.y][currentBlock.form[3][1] + currentBlock.x] = 0;
-	currentBlock.x ++;
-	grid[currentBlock.form[0][0] + currentBlock.y][currentBlock.form[0][1] + currentBlock.x] = currentBlock.color;
-	grid[currentBlock.form[1][0] + currentBlock.y][currentBlock.form[1][1] + currentBlock.x] = currentBlock.color;
-	grid[currentBlock.form[2][0] + currentBlock.y][currentBlock.form[2][1] + currentBlock.x] = currentBlock.color;
-	grid[currentBlock.form[3][0] + currentBlock.y][currentBlock.form[3][1] + currentBlock.x] = currentBlock.color;
+var moveHorizontal = function(direction) {
+	// direction: left = -1, right = +1
+	currentBlock.x += direction;
+	for (var i = 0; i < 4; i++) {
+		grid[currentBlock.form[i][0] + currentBlock.y][currentBlock.form[i][1] + currentBlock.x - direction] = 0;
+	}
+	for (var i = 0; i < 4; i++) {
+		grid[currentBlock.form[i][0] + currentBlock.y][currentBlock.form[i][1] + currentBlock.x] = currentBlock.color;
+	}
 }
 
 var checkIfLegalMove = function(dir) {
@@ -129,8 +116,14 @@ var rotateBlock = function(block, orientation) {
    }
 	for (var i = 0; i < block.form.length; i++) {
     	grid[block.y + block.form[i][0]][block.x + block.form[i][1]] = 0;
+<<<<<<< HEAD
       block.form[i] = multiply([block.form[i]], orientation ? [[0, 1], [-1, 0]] : [[0, -1], [1, 0]])[0];
 		// debugger;
+=======
+    	block.form[i] = multiply([block.form[i]], orientation ? [[0, 1], [-1, 0]] : [[0, -1], [1, 0]])[0];
+
+    	rotatedForm = multiply([block.form[i]], orientation ? [[0, 1], [-1, 0]] : [[0, -1], [1, 0]])[0];
+>>>>>>> 8f658fa1595674858010ad47c44fddddb1f88369
 	}
 	grid[block.form[0][0] + block.y][block.x + block.form[0][1]] = block.color;
 	grid[block.y + block.form[1][0]][block.x + block.form[1][1]] = block.color;
@@ -156,6 +149,7 @@ var checkIfMoveable = function(){
   }
 	return true;
 }
+
 
 var interval = setInterval(function() {
 	if(gameIsStarted && normalSpeed && checkIfMoveable()){
