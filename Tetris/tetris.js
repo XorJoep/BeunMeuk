@@ -94,7 +94,7 @@ var startNewGame = function(){
 function checkKey(e) {
   e = e || window.event;
   if(e.keyCode == '38' ) {//&& checkIfLegalMove("up")){
-    currentBlock = rotateBlock(currentBlock,1);
+    currentBlock = rotateBlock(currentBlock, 1);
     showBoard();
   }
   if (e.keyCode == '40') {
@@ -191,10 +191,17 @@ function multiply(a, b) {
 
 var rotateBlock = function(block, orientation) {
 	//rotates around second value in form
-	if(!block.rotatable) return block;
-		for (var i = 0; i < block.form.length; i++) {
-			block.form[i] = multiply([block.form[i]], orientation ? [[0, 1], [-1, 0]] : [[0, -1], [1, 0]])[0];
-		}
+	if(!block.rotatable){
+     return block;
+   }
+	for (var i = 0; i < block.form.length; i++) {
+    grid[currentBlock.y + currentBlock.form[i][0]][currentBlock.x + currentBlock.form[i][1]] = 0;
+		block.form[i] = multiply([block.form[i]], orientation ? [[0, 1], [-1, 0]] : [[0, -1], [1, 0]])[0];
+	}
+  grid[currentBlock.form[0][0] + currentBlock.y][currentBlock.x + currentBlock.form[0][1]] = currentBlock.color;
+  grid[currentBlock.y + currentBlock.form[1][0]][currentBlock.x + currentBlock.form[1][1]] = currentBlock.color;
+  grid[currentBlock.y + currentBlock.form[2][0]][currentBlock.x + currentBlock.form[2][1]] = currentBlock.color;
+  grid[currentBlock.y + currentBlock.form[3][0]][currentBlock.x + currentBlock.form[3][1]] = currentBlock.color;
 	return block;
 
 }
@@ -206,13 +213,19 @@ var checkIfMoveable = function(){
 			return false;
 		}
 	}
-	var currentBlockCoords = [];
-	for(var i = 0; i < 4; i++){
-		currentBlockCoords.push([currentBlock.y + currentBlock.form[i][0] , currentBlock.x + currentBlock.form[i][1]]);
-	}
+	//var blocksThatCollide = getBlocksThatCanCollide();
 	return true;
 }
 
+var getBlocksThatCanCollide = function(){
+  var firstBlock = currentBlock.form[0];
+  var secondBlock = currentBlock.form[1];
+  var thirdBlock = currentBlock.form[2];
+  var fourthBlock = currentBlock.form[3];
+  for(var i = i; i < 4; i++){
+    if(currentBlock.form[0][0] === currentBlock.form[i][0])
+  }
+}
 var interval = setInterval(function() {
 	if(gameIsStarted && normalSpeed && checkIfMoveable()){
 		grid[currentBlock.y + currentBlock.form[0][0]][currentBlock.x + currentBlock.form[0][1]] = 0;
