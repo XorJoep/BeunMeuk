@@ -55,7 +55,7 @@ var Blocks = {
 	Z: {
 		code: "Z",
 		rotatable: true,
-		form: [[0,0], [0, -1], [-1, -1], [1, 0]],
+		form: [[0,0], [0, -1], [1, -1], [-1, 0]],
 		color: RGBToHex(255,0,0) //Red
 	},
 

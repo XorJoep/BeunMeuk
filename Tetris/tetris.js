@@ -2,12 +2,19 @@ var grid = [];
 var currentBlock;
 var normalSpeed = true;
 var gameIsStarted = false;
-var interval = setInterval(fallDown, 500);;
+var interval = setInterval(fallDown, intervalMs);
+var intervalMs = 400;
+var score = 0;
+var highscore = 0;
+var gameOverBoolean = false;
 
 document.onkeydown = checkKey;
 
 var startNewGame = function(){
-	currentBlock = getRandomBlock();
+	intervalMs = 400;
+	gameOverBoolean = false;
+	score = 0;
+	document.getElementById("score").innerHTML = "Score: " + score;
 	normalSpeed = true;
     grid = [];
 	for(var i = 0; i < 16; i++){
@@ -17,6 +24,7 @@ var startNewGame = function(){
 		}
 		grid.push(row);
 	}
+	currentBlock = getRandomBlock();
 	for(var i = 0; i < 4; i++) {
 		grid[currentBlock.form[i][0] + currentBlock.y][currentBlock.form[i][1] + currentBlock.x] = currentBlock.color;
 	}
@@ -34,7 +42,7 @@ function checkKey(e) {
   		clearInterval(interval);
   		normalSpeed = !normalSpeed;
   		if (normalSpeed) {
-  			interval = setInterval(fallDown, 500);
+  			interval = setInterval(fallDown, intervalMs);
   		}
   		else {
   			interval = setInterval(fallDown, 100);
@@ -57,7 +65,7 @@ var showBoard = function() {
   for (var i = 0; i < rows.length; i++) {
     tiles = rows[i].getElementsByClassName("tile");
     for (var j = 0; j < tiles.length; j++) {
-      tiles[j].style.background = grid[i][j] !== 0 ? grid[i][j]  : "lightgrey";
+      tiles[j].style.background = grid[i][j] !== 0 ? grid[i][j]  : "white";
     	}
 	}
 }
@@ -80,7 +88,6 @@ var checkIfLegalMove = function(dir) {
 				return false;
 			}
       if(grid[currentBlock.y + currentBlock.form[i][0]][currentBlock.x + currentBlock.form[i][1] - 1] !== 0 && !checkIfCoorIsInCurrentBlock(currentBlock.y + currentBlock.form[i][0], currentBlock.x + currentBlock.form[i][1] - 1)){
-        console.log("hoi");
         return false;
       }
 		}
@@ -99,14 +106,23 @@ var checkIfLegalMove = function(dir) {
 }
 
 var getRandomBlock = function() {
-  // if(grid[3][2] !== 0){
-  //   gameOver();
-  //   return;
-  // }
 	var type = Math.floor(Math.random() * 8);
 	block = new Block(Blocks[Blocks[type]]);
-	block.y = 1;
+	if(block.code === "I"){
+		block.y = 2
+	}
+	else{
+		block.y = 1;
+	}
 	block.x = 3;
+	for(var i = 0; i < 4; i++){
+		if(grid[block.y + block.form[i][0]][block.x + block.form[i][1]] !== 0){
+			gameOver();
+			return;
+		}
+	}
+	clearInterval(interval);
+	interval = setInterval(fallDown, intervalMs--);
 	return block;
 }
 
@@ -154,7 +170,7 @@ var checkIfMoveable = function(){
 }
 
 function fallDown() {
-	if(gameIsStarted && checkIfMoveable()) {
+	if(gameIsStarted && checkIfMoveable() && !gameOverBoolean) {
 		for (var i = 0; i < 4; i++) {
 			grid[currentBlock.y + currentBlock.form[i][0]][currentBlock.x + currentBlock.form[i][1]] = 0;
 		}
@@ -170,6 +186,11 @@ function fallDown() {
 
 var gameOver = function(){
   window.alert("game Over");
+	if(score > highscore){
+		highscore = score;
+		document.getElementById("highscore").innerHTML = "Highscore: " + highscore;
+	}
+	gameOverBoolean = true;
 }
 var checkIfLineIsFull = function(i){
   for(var j = 0; j < 8; j++){
@@ -193,6 +214,8 @@ var checkIfLinesNeedToBeDeleted = function(){
       for(var j = 0; j < 8; j++){
         grid[i][j] = 0;
       }
+			score ++;
+			document.getElementById("score").innerHTML = "Score: " + score;
     }
   }
   applyGravity();
