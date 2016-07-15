@@ -128,19 +128,15 @@ var checkIfMoveable = function(){
 			return false;
 		}
 	}
-	//var blocksThatCollide = getBlocksThatCanCollide();
-	return true;
+	for(var i = 0; i < 4; i++){
+    if(grid[currentBlock.y + currentBlock.form[i][0] + 1][currentBlock.x + currentBlock.form[i][1]] !== 0 && grid[currentBlock.form[i][0] + currentBlock.y][currentBlock.form[i][1] + currentBlock.x] !== grid[currentBlock.form[i][0] + currentBlock.y + 1][currentBlock.form[i][1] + currentBlock.x]){
+      currentBlock = getRandomBlock();
+      return false;
+    }
+  }
+  return true;
 }
 
-var getBlocksThatCanCollide = function(){
-  var firstBlock = currentBlock.form[0];
-  var secondBlock = currentBlock.form[1];
-  var thirdBlock = currentBlock.form[2];
-  var fourthBlock = currentBlock.form[3];
-  for(var i = i; i < 4; i++){
-    if(currentBlock.form[0][0] === currentBlock.form[i][0])
-  }
-}
 var interval = setInterval(function() {
 	if(gameIsStarted && normalSpeed && checkIfMoveable()){
 		grid[currentBlock.y + currentBlock.form[0][0]][currentBlock.x + currentBlock.form[0][1]] = 0;
