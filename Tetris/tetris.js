@@ -99,10 +99,6 @@ var checkIfLegalMove = function(dir) {
 }
 
 var getRandomBlock = function() {
-  // if(grid[3][2] !== 0){
-  //   gameOver();
-  //   return;
-  // }
 	var type = Math.floor(Math.random() * 8);
 	block = new Block(Blocks[Blocks[type]]);
 	block.y = 1;
@@ -165,8 +161,6 @@ function fallDown() {
 		showBoard();
 	}
 }
-
-
 
 var gameOver = function(){
   window.alert("game Over");
