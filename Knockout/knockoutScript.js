@@ -13,13 +13,12 @@ function IncidentsViewModel() {
     var incidentsArray = incidentList;
     var array = [];
     for(var i = 0; i < incidentsArray.length; i++){
-      //if(incidentsArray[i].targetDate != null){
+      if(incidentsArray[i].targetDate != null){
         var name = incidentsArray[i].creator ? incidentsArray[i].creator.name : "";
-        var dateSplit = incidentsArray[i].targetDate ? incidentsArray[i].targetDate.split('-') : "";
-        var timeLeft = dateSplit ? (calculateTimeLeft(new Date(dateSplit[0], dateSplit[1], dateSplit[2].substring(0,2))))  : "";
+        var timeLeft = incidentsArray[i].targetDate ? calculateTimeLeft(new Date(incidentsArray[i].targetDate))  : "";
         var req = incidentsArray[i].request.split(":")[3];
         array.push(new Incident(name, incidentsArray[i].briefDescription, timeLeft, req));
-      //}
+      }
     }
     self.incidents = ko.observableArray(array);
 
@@ -31,7 +30,7 @@ function IncidentsViewModel() {
 
 var fillHTML = function(){
   if(incidentsImported){
-    var s = "<table><thead><tr><th>Creator Name</th><th>Brief Description</th><th>Due Date</th><th>Request</th></tr></thead><tbody data-bind='foreach: incidents'><tr><td data-bind='text: name'></td><td data-bind='text: descr'></td><td data-bind='text: timeLeft'></td><td data-bind='text: req'></td><td><a href='#' data-bind='click: $root.removeIncident'>Done</a></td></tr></tbody></table><script type='text/javascript' src='knockoutScript.js' defer></script>";
+    var s = "<table><thead><tr><th>Creator Name</th><th>Brief Description</th><th>Due Date</th><th>Request</th></tr></thead><tbody data-bind='foreach: incidents'><tr><td data-bind='text: name'></td><td data-bind='text: descr'></td><td data-bind='text: timeLeft, css: {overdue: parseInt(timeLeft) < 0}'></td><td data-bind='text: req'></td><td><a href='#' data-bind='click: $root.removeIncident'>Done</a></td></tr></tbody></table><script type='text/javascript' src='knockoutScript.js' defer></script>";
     document.getElementById("list").innerHTML = s;
     ko.applyBindings(new IncidentsViewModel());
   }
