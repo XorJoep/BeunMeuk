@@ -43,8 +43,11 @@ function initializeArray(){
 
 function changeColor(elem){
   counter[parseInt(elem)]++;
+  if(counter[parseInt(elem)] === 5) {
+  	counter[parseInt(elem)] = 0;
+  }
 
-  switch (counter[parseInt(elem)]%5) {
+  switch (counter[parseInt(elem)]) {
     case 0:
       document.getElementById(elem).innerHTML = '<div id="red"></div>';
       break;
@@ -66,19 +69,23 @@ function changeColor(elem){
 
 function checkMaster(){
   var correct = 0;
+  var whites = 0;
   var currentRow = [counter[startOfRow], counter[startOfRow+1],counter[startOfRow+2],counter[startOfRow+3]];
+  var done = [false, false, false, false];
+  var check = [true, true, true, true];
+
   for(var i = 0; i < solution.length; i++){
-    if(currentRow[i] === -1){
-      return;
+    if(currentRow[i] === -1) { //invalid input
+      return; 
     }
   }
 
   for(var i = 0; i < solution.length; i++){
-    if(solution[i] !== currentRow[i]){
-      console.log("ToDo");
-    }
-    else{
+    if(solution[i] === currentRow[i]){
       correct++;
+      done[i] = true;
+      check[i] = false;
+      console.log(correct);
     }
   }
 
@@ -86,7 +93,19 @@ function checkMaster(){
     window.alert("Yeah, well done!");
   }
 
-  colorCheckTiles(correct);
+  for(var i = 0; i < solution.length; i++) {
+  	if(check[i] === true){
+  		for(var j = 0; j < solution.length; j++) {
+  			if((done[j] === false) && (currentRow[i] === solution[j])) {
+  				done[j] = true;
+  				whites++;
+  				console.log(whites);
+  			}
+  		}
+  	}
+  }
+
+  colorCheckTiles(correct, whites);
 
   startOfRow += 10;
 
@@ -98,13 +117,17 @@ function randomizeSolution(){
   }
 }
 
-function colorCheckTiles(correct){
+function colorCheckTiles(correct, whites){
   var id = row * 100;
   row++;
   var idArray = [id, id + 1, id + 10, id + 11];
 
   for(var i = 0; i < correct; i++) {
       document.getElementById(idArray[i]).innerHTML = '<div id="redChecker"></div>';
+  }
+
+  for(var i = correct; i < correct + whites; i++) {
+  	document.getElementById(idArray[i]).innerHTML = '<div id="whiteChecker"></div>';
   }
 
 }

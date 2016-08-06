@@ -60,3 +60,10 @@
   height:10px;
   background: red;
 }
+
+#whiteChecker {
+  width: 10px;
+  height:10px;
+  background: white;
+}
+
