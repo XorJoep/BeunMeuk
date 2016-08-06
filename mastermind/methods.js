@@ -107,6 +107,9 @@ function checkMaster() {
   	colorCheckTiles(correct, whites);
 
   	startOfRow += 10;
+  	if(startOfRow === 100){
+  		window.alert("Game over..." + solution);
+  	}
 }
 
 function randomizeSolution() {
