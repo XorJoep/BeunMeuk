@@ -41,6 +41,12 @@ function initializeArray() {
 	}
 }
 
+function randomizeSolution() {
+	for (var i = 0; i < solution.length; i++) {
+		solution[i] = Math.floor(Math.random()*5);
+	}
+}
+
 
 function changeColor(elem) {
 	counter[parseInt(elem)]++;
@@ -109,14 +115,8 @@ function checkMaster() {
 
   	startOfRow += 10;
   	if(startOfRow === 100){
-  		window.alert("Game over..." + solution);
+  		window.alert("Game over... The solution was:" + solution);
   	}
-}
-
-function randomizeSolution() {
-	for (var i = 0; i < solution.length; i++) {
-		solution[i] = Math.floor(Math.random()*5);
-	}
 }
 
 function colorCheckTiles(correct, whites) {
