@@ -99,6 +99,7 @@ function checkMaster() {
 				if ((done[j] === false) && (currentRow[i] === solution[j])) {
 					done[j] = true;
 					whites++;
+					break;
 				}
 			}
 		}
