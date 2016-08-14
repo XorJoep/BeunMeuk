@@ -131,4 +131,8 @@ function colorCheckTiles(correct, whites) {
 	for (var i = correct; i < correct + whites; i++) {
 		document.getElementById(idArray[i]).innerHTML = '<div id="whiteChecker"></div>';
 	}
+
+	for (var i = correct + whites; i < solution.length; i++) {
+		document.getElementById(idArray[i]).innerHTML = '<div id="blackChecker"></div>';
+	}
 }
