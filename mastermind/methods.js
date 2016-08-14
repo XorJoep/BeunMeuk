@@ -54,21 +54,23 @@ function changeColor(elem) {
 		counter[parseInt(elem)] = 0;
 	}
 
+	var element = document.getElementById(elem);
+
 	switch (counter[parseInt(elem)]) {
 		case 0:
-	  		document.getElementById(elem).innerHTML = '<div id="red"></div>';
+	  		element.innerHTML = '<div id="red"></div>';
 	  		break;
 		case 1:
-		  	document.getElementById(elem).innerHTML = '<div id="blue"></div>';
+		  	element.innerHTML = '<div id="blue"></div>';
 		  	break;
 		case 2:
-		  	document.getElementById(elem).innerHTML = '<div id="green"></div>';
+		  	element.innerHTML = '<div id="green"></div>';
 		  	break;
 		case 3:
-		  	document.getElementById(elem).innerHTML = '<div id="yellow"></div>';
+		  	element.innerHTML = '<div id="yellow"></div>';
 		  	break;
 		case 4:
-		  	document.getElementById(elem).innerHTML = '<div id="orange"></div>';
+		  	element.innerHTML = '<div id="orange"></div>';
 		  	break;
 	  }
 
