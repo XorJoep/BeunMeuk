@@ -1,4 +1,4 @@
-.row2048{
+.row{
   display:flex;
 }
 .tile{
@@ -10,15 +10,4 @@
   margin: 5px;
   line-height: 50px;
   background: lightgrey;
-}
-
-#container2048{
-  display: flex;
-  flex-wrap: wrap;
-  align-content: center;
-  width: 280px;
-  height: 280px;
-  border-style: solid;
-  padding: 0;
-  background-color: #EEE8AA;
 }
