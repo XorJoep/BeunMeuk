@@ -1,0 +1,10 @@
+.row{
+  display: flex;
+}
+.tile{
+  font-size: 30px;
+  width: 30px;
+  height:30px;
+
+  background: lightgrey;
+}
