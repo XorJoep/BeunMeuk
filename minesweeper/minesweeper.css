@@ -1,85 +1,96 @@
-.tile{
-  width: 20px;
-  height: 20px;
-  padding: 2px;
-  margin: 2px;
+#MinesweeperContainer{
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  width: 370px;
+  height: 370px;
+  border-style: solid;
+  padding: 0;
+  background-color: #EEE8AA;
+}
+
+.MinesweeperTile{
+  width: 25px;
+  height: 25px;
+  padding: 3px;
+  margin: 3px;
   background: darkgrey;
 }
 .turnedTile0{
-  width: 20px;
-  height: 20px;
-  padding: 2px;
-  margin: 2px;
+  width: 25px;
+  height: 25px;
+  padding: 3px;
+  margin: 3px;
   background: lightgrey;
 }
 .turnedTile1{
-  width: 20px;
-  height: 20px;
-  padding: 2px;
-  margin: 2px;
+  width: 25px;
+  height: 25px;
+  padding: 3px;
+  margin: 3px;
   background: lightgrey;
 }
 .turnedTile2{
-  width: 20px;
-  height: 20px;
-  padding: 2px;
-  margin: 2px;
+  width: 25px;
+  height: 25px;
+  padding: 3px;
+  margin: 3px;
   background: lightgrey;
   color: blue;
 }
 .turnedTile3{
-  width: 20px;
-  height: 20px;
-  padding: 2px;
-  margin: 2px;
+  width: 25px;
+  height: 25px;
+  padding: 3px;
+  margin: 3px;
   background: lightgrey;
   color: red;
 }
 .turnedTile4{
-  width: 20px;
-  height: 20px;
-  padding: 2px;
-  margin: 2px;
+  width: 25px;
+  height: 25px;
+  padding: 3px;
+  margin: 3px;
   background: lightgrey;
   color: green;
 }
 .turnedTile5{
-  width: 20px;
-  height: 20px;
-  padding: 2px;
-  margin: 2px;
+  width: 25px;
+  height: 25px;
+  padding: 3px;
+  margin: 3px;
   background: lightgrey;
   color: purple;
 }
 .turnedTile6{
-  width: 20px;
-  height: 20px;
-  padding: 2px;
-  margin: 2px;
+  width: 25px;
+  height: 25px;
+  padding: 3px;
+  margin: 3px;
   background: lightgrey;
   color: orange;
 }
 .turnedTile7{
-  width: 20px;
-  height: 20px;
-  padding: 2px;
-  margin: 2px;
+  width: 25px;
+  height: 25px;
+  padding: 3px;
+  margin: 3px;
   background: lightgrey;
   color: pink;
 }
 .turnedTile8{
-  width: 20px;
-  height: 20px;
-  padding: 2px;
-  margin: 2px;
+  width: 25px;
+  height: 25px;
+  padding: 3px;
+  margin: 3px;
   background: lightgrey;
   color: darkblue;
 }
 .bombTile{
-  width: 20px;
-  height: 20px;
-  padding: 2px;
-  margin: 2px;
+  width: 25px;
+  height: 25px;
+  padding: 3px;
+  margin: 3px;
   background: orange;
 }
 #parent{

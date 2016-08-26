@@ -1,0 +1,112 @@
+
+#game{
+	position: static;
+	width: 400px;
+	background-color: #EEE8AA;
+	height:400px;
+	border-width:2px;
+	border-color:black;
+	border-style:solid;
+}
+
+#gamespace {
+	display:flex;
+}
+
+#emptyspace {
+	padding:0 0 0 0;
+	position:relative;
+	z-index:10;
+}
+
+#gameover {
+	position:relative;
+	text-align: center;
+	font-size:60;
+	padding-top:20%;
+	color:white;
+}
+
+#score {
+	font-size: 30;
+	position:relative;
+	text-align:center;
+	color:white;
+}
+
+#restart{
+	align:center;
+	text-align:center;
+	position:relative;
+	display:block;
+	margin:0 auto;
+	margin-top:10%;
+}
+
+#buttonID{
+	align:center;
+	text-align:center;
+	position:relative;
+	display:block;
+	margin:0 auto;
+
+}
+
+.classWall {
+	background-color:brown;
+	display:inline-block;
+	position:relative;
+	z-index:8;
+		align:center;
+
+}
+
+.classHole {
+	background-color: #EEE8AA;
+	position:relative;
+	display:inline-block;
+	z-index:9;
+		align:center;
+}
+
+.classAvatar {
+	background-color:black;
+	position:relative;
+	display: inline-block;
+	width:20px;
+	height:20px;
+	z-index:10;
+	border-radius:50%;
+		align:center;
+}
+
+.col2 {
+	width:16.66%;
+	background-color:lightblue;
+	height:50%;
+	z-index:10
+
+}
+
+.col8 {
+	width:66.66%;
+	background-color: #EEE8AA;
+	height:50%;
+	border-width:2px;
+	border-color:black;
+	border-style:solid;
+}
+
+.col12 {
+	width:100%;
+	margin:0px;
+	text-align:center;
+	padding-top:2%;
+	padding-bottom:4%;
+	z-index:9;
+	position:relative;
+}
+
+.button {
+	margin:10px;
+}

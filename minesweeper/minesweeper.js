@@ -18,7 +18,7 @@ var makeNewBoard = function(){
     }
   }
 }
-var startNewGame = function(width){
+var playMineSweeper = function(width){
   currentSeconds = 0;
   gameIsStarted = true;
   gameOverBoolean = false;
@@ -28,11 +28,12 @@ var startNewGame = function(width){
     s += '<div id = "parent">';
     for(var j = 0; j < width; j++){
       var id = + i + '' + j;
-      s += '<div oncontextmenu = placeFlag("' + id + '") onclick = clickTile("' + i + '' + j + '") class="tile" id=' + i + '' + j + '></div>';
+      s += '<div oncontextmenu = placeFlag("' + id + '") onclick = clickTile("' + i + '' + j + '") class="MinesweeperTile" id=' + i + '' + j + '></div>';
     }
     s += '</div>';
   }
-  document.getElementById("tiles").innerHTML = s;
+
+  document.getElementById("MinesweeperTiles").innerHTML = s;
 }
 var clickTile = function(id){
   if(!gameOverBoolean){
@@ -60,7 +61,7 @@ var turnTile = function(x, y){
       highscore = currentSeconds;
     }
     gameIsStarted = false;
-    document.getElementById("highscore").innerHTML = "Higscore: " + highscore;
+    document.getElementById("MinesweeperHighscore").innerHTML = "Higscore: " + highscore;
   }
   return getAmountOfSurroundingBombs(x, y) + "";
 }
@@ -91,7 +92,7 @@ var expand = function(x, y){
   for(var i = x - 1; i <= x + 1; i++){
     for(var j = y - 1; j <= y + 1; j++){
       if(i >= 0 && j >= 0 && i < 10 && j < 10){
-        if(document.getElementById(i + "" + j).className === "tile"){
+        if(document.getElementById(i + "" + j).className === "MinesweeperTile"){
           tilesToTurn.push([i, j]);
         }
       }
@@ -127,14 +128,14 @@ var gameOver = function(){
 var currentSeconds = 0;
 var interval = setInterval(function() {
   if(gameIsStarted){
-    document.getElementById("timer").innerHTML = ++currentSeconds;
+    document.getElementById("MinesweeperTimer").innerHTML = ++currentSeconds;
   }
 }, 1000);
 var getAmountOfTurnedTiles = function(){
   var amount = 0;
   for(var i = 0; i < 10; i ++){
     for(var j = 0; j < 10; j++){
-      if(document.getElementById(i + "" + j).className !== "tile" && !(document.getElementById(i + "" + j).className === "bombTile")){
+      if(document.getElementById(i + "" + j).className !== "MinesweeperTile" && !(document.getElementById(i + "" + j).className === "bombTile")){
         amount++;
       }
     }

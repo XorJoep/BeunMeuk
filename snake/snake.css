@@ -1,0 +1,23 @@
+
+.isSnake{
+  background-color: blue;
+  border-width: 1px;
+  /*border-style: solid;*/
+}
+
+.isNotSnake{
+  background-color: transparent;
+  border-width: 1px;
+  /*border-style: solid;*/
+}
+
+#snakeContainer{
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  width: 400px;
+  height: 400px;
+  border-style: solid;
+  padding: 0;
+  background-color: #EEE8AA;
+}

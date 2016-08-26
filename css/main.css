@@ -1,0 +1,54 @@
+@import url("framework.css");
+@import url("../guessNumber/guessNumber.css");
+@import url("../snake/snake.css");
+@import url("../2048/2048.css");
+@import url("../minesweeper/minesweeper.css");
+@import url("../wallgame/styles.css");
+
+html{
+  background-image: url("images/background.jpg");
+  background-repeat:no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  height: 100%;
+}
+
+.app{
+  background-color: gray;
+  color:white;
+  padding: 50px;
+}
+
+body{
+  max-width: 100%;
+  font-size: x-large;
+  font-family: fantasy;
+  height:100%
+}
+
+.rowFiller{
+  height:150px;
+}
+
+.content{
+  background-color: gray;
+  border-style: solid;
+}
+
+
+.backgroundFiller{
+  background-color: transparent;
+}
+
+button{
+  font-size: x-large;
+}
+
+#gamesBar{
+  width: 100%;
+  position: fixed;
+}
+
+#background{
+  min-height: 100%;
+}
