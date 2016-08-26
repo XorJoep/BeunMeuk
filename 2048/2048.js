@@ -3,15 +3,16 @@ var grid =[]
 document.onkeydown = checkKey;
 
 var gameOver = false;
-var startNewGame = function(){
+var play2048 = function(){
   gameOver = false;
   for(var i = 0; i < 4; i++){
     grid[i] = [0,0,0,0];
   }
   var assignedTiles = 0;
   while(assignedTiles !== 2){
-    var x = getRandomNumber();
-    var y = getRandomNumber();
+    var x = getRandomNumber2048();
+    var y = getRandomNumber2048();
+    console.log(x,y);
     if(grid[x][y] === 0){
       grid[x][y] = 2;
       assignedTiles ++;
@@ -19,7 +20,7 @@ var startNewGame = function(){
   }
   showBoard();
 }
-var getRandomNumber = function(){
+var getRandomNumber2048 = function(){
 	return Math.floor((Math.random() * 4));
 }
 
@@ -29,8 +30,8 @@ var getColor = function(value) {
 }
 
 var showBoard = function(){
-  var board = document.getElementById("board");
-  var rows = board.getElementsByClassName("row");
+  var board = document.getElementById("board2048");
+  var rows = board.getElementsByClassName("row2048");
   var tiles;
   for (var i = 0; i < rows.length; i++) {
     tiles = rows[i].getElementsByClassName("tile");
@@ -40,22 +41,7 @@ var showBoard = function(){
       tiles[j].style.fontSize = Math.log2(grid[i][j]) > 6 ? "30px" : "50px";
     }
   }
-  
-
-  // s = "";
-  // for(var i = 0; i < 4; i++){
-  //   s += "<div class = 'row'>";
-  //   for(var j = 0; j < 4; j++){
-  //     s += "<div class ='tile" + grid[i][j] + "'>";
-  //     if(grid[i][j] !== 0){
-  //       s += grid[i][j];
-  //     }
-  //     s += "</div>";
-  //   }
-  //   s += "</div>"
-  // }
-  // document.getElementById("board").innerHTML = s;
-  }
+}
 
 
 function checkKey(e) {
