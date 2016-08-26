@@ -1,4 +1,4 @@
-.row{
+.row2048{
   display:flex;
 }
 .tile{
@@ -10,4 +10,14 @@
   margin: 5px;
   line-height: 50px;
   background: lightgrey;
+}
+
+#container2048{
+	position: static;
+	width: 280px;
+	background-color: #EEE8AA;
+	height:280px;
+	border-width:2px;
+	border-color:black;
+	border-style:solid;
 }
