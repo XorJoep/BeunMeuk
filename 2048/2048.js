@@ -12,7 +12,6 @@ var play2048 = function(){
   while(assignedTiles !== 2){
     var x = getRandomNumber2048();
     var y = getRandomNumber2048();
-    console.log(x,y);
     if(grid[x][y] === 0){
       grid[x][y] = 2;
       assignedTiles ++;
